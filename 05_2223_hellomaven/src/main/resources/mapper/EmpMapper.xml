@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper为映射的根节点，namespace指定Dao接口的完整类名
+    mybatis会依据这个接口动态创建一个实现类去实现这个接口，
+    而这个实现类是一个Mapper对象-->
+<!--id ="接口中的方法名"
+　　parameterType="传入的参数类型"
+　　resultType = "返回实体类对象，使用包.类名"-->
+<mapper namespace="com.ruby.dao.EmpMapper">
+    <resultMap id="EmpMap" type="com.ruby.Emp">
+<!--        <result column="eid" property="eid"/>-->
+<!--        <result column="ename" property="ename"/>-->
+        <result column="eage" property="a"/>
+    </resultMap>
+<!--    <select id="getAllEmp" resultType="com.ruby.Emp">-->
+<!--        select * from Emp;-->
+<!--      </select>-->
+    <select id="getById" parameterType="int" resultMap="EmpMap">
+        select * from emp where eid = #{eid};
+    </select>
+<!--    分页-->
+    <select id="getEmpLimit" parameterType="map" resultType="com.ruby.Emp">
+        select * from emp limit #{start},#{pageSize};
+    </select>
+    <select id="getEmpRowBounds" resultType="com.ruby.Emp">
+        select * from emp
+    </select>
+<!--    <insert id="insertIntoEmp" parameterType="com.ruby.Emp">-->
+<!--        insert into emp (eid,ename,eage) values (#{eid},#{ename},#{eage});-->
+<!--    </insert>-->
+<!--    <update id="updateEmpById" parameterType="com.ruby.Emp">-->
+<!--        update emp set ename = '赵六' where eid = #{eid};-->
+<!--    </update>-->
+<!--    <delete id="deleteEmpById" parameterType="com.ruby.Emp">-->
+<!--        delete from emp where eid = #{id};-->
+<!--    </delete>-->
+<!--    <select id="getEmpLike" resultType="com.ruby.Emp">-->
+<!--        select * from emp where ename like #{value};-->
+<!--    </select>-->
+</mapper>
